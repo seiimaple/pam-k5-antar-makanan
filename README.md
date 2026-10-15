@@ -1,3 +1,19 @@
+# Tema 5 - Pesan Antar Makanan Kantin
+
+Repository ini berisi proyek aplikasi Kotlin Multiplatform (KMP) untuk mata kuliah Pengembangan Aplikasi Mobile. Proyek ini dibangun dari *template* Compose Multiplatform.
+
+## Anggota Kelompok
+
+* **Ketua:** Rifka Priseilla Br Silitonga (123140024)
+* **Anggota:**
+  * Daniel Calvin Simanjuntak (123140004)
+  * Fadzilah Saputri (123140149)
+  * Marvin Karyanda (123140185)
+
+## Tangkapan Layar Aplikasi
+
+
+
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
 
 * [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
