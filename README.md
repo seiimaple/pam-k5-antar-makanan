@@ -11,8 +11,8 @@ Repository ini berisi proyek aplikasi Kotlin Multiplatform (KMP) untuk mata kuli
   * Marvin Karyanda (123140185)
 
 ## Tangkapan Layar Aplikasi
-
-
+![img.png](img.png)
+![img_1.png](img_1.png)
 
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
 
