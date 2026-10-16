@@ -60,6 +60,7 @@ fun App() {
 
                     Text("=== Daftar Anggota ===")
                     Text("Rifka Priseilla Br Silitonga (123140024)")
+                    Text("Marvin Karyanda (123140185)")
                 }
             }
         }
