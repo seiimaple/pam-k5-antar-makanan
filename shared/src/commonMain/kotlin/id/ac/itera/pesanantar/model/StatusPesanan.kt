@@ -9,4 +9,14 @@ sealed class StatusPesanan {
     data class Diantar(val namaDriver: String) : StatusPesanan()
 
     data object Selesai : StatusPesanan()
+
+    // Fungsi label() untuk menampilkan status dalam bentuk teks
+    fun label(): String = when (this) {
+        is MenungguKonfirmasi -> "Menunggu Konfirmasi"
+        is Diproses -> "Pesanan sedang diproses oleh koki $namaKoki"
+        is Diantar -> "Pesanan sedang diantar oleh driver $namaDriver"
+        is Selesai -> "Pesanan selesai"
+    }
 }
+
+fun label(status: StatusPesanan): String = status.label()

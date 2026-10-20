@@ -8,4 +8,7 @@ data class Pesanan(
     val lokasiAntar: String,
     val catatanKhusus: String?,
     val status: StatusPesanan
-)
+) {
+    // Fungsi pembantu untuk mendapatkan teks status pesanan
+    fun label(): String = status.label()
+}
