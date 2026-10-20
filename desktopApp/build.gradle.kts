@@ -26,3 +26,12 @@ compose.desktop {
         }
     }
 }
+
+tasks.register<JavaExec>("runSimulasi") {
+    group = "application"
+    description = "Menjalankan simulasi perubahan status pesanan."
+
+    dependsOn("classes")
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("id.ac.itera.pesanantar.SimulasiPesanan")
+}

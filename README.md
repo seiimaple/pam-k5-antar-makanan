@@ -49,3 +49,38 @@ Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+## Pengujian Simulasi Status Pesanan
+
+Program menggunakan `SumberPesananPalsu` untuk menghasilkan perubahan
+status melalui `Flow`. Setiap status diterima dengan `collect`, kemudian
+ditampilkan di konsol menggunakan fungsi `label()`.
+
+### Cara Menjalankan
+
+Buka PowerShell di folder utama project, lalu jalankan:
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+.\gradlew.bat :desktopApp:runSimulasi --console=plain
+```
+
+### Hasil Pengujian
+
+Status muncul berurutan sesuai jeda simulasi:
+
+```text
+Simulasi status pesanan #1
+Menunggu Konfirmasi
+Pesanan sedang diproses oleh koki Chef Juna
+Pesanan sedang diantar oleh driver Pak Budi
+Pesanan selesai
+Simulasi selesai.
+```
+
+Program selesai tanpa error dan Gradle menampilkan `BUILD SUCCESSFUL`.
+
+### Screenshot Hasil Konsol
+
+![Hasil simulasi status pesanan](docs/hasil-simulasi.png)
