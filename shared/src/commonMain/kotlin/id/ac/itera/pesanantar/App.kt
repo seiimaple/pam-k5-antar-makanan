@@ -60,8 +60,11 @@ fun App() {
 
                     Text("=== Daftar Anggota ===")
                     Text("Rifka Priseilla Br Silitonga (123140024)")
+                    Text("Marvin Karyanda (123140185)")
+                    Text("Fadzilah-Saputri (123140149)")
+                    Text("Daniel Calvin Simanjuntak (123140004)")
                 }
             }
         }
     }
-}4
+}
