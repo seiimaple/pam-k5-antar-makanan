@@ -10,62 +10,119 @@ Repository ini berisi proyek aplikasi Kotlin Multiplatform (KMP) untuk mata kuli
   * Fadzilah Saputri (123140149)
   * Marvin Karyanda (123140185)
 
-## Tangkapan Layar Aplikasi
+## Modul 1 - Pengenalan Project
 
-### Modul 03 - Daftar Pesanan dan Tombol Tambah
+Tampilan awal aplikasi berisi judul tema dan tombol Tentang Kelompok untuk
+menampilkan platform serta daftar anggota kelompok.
 
-![Daftar pesanan kantin dengan FAB tambah di kanan bawah](docs/daftar-pesanan-fab.jpg)
+### Tangkapan Layar Aplikasi
 
-Layar menampilkan 11 data contoh menggunakan `LazyColumn` dan `KartuPesanan`.
-Data diurutkan berdasarkan ID terbesar melalui `getPesananTerbaru()`
-(`sortedByDescending`), sehingga pesanan terbaru tampil di atas. Setiap kartu
-memuat nama pemesan, rincian pesanan, lokasi antar, catatan jika ada, dan label
-status dari `StatusPesanan`.
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th width="270" style="border: 1px solid #888; padding: 10px; text-align: center;">Tampilan Awal</th>
+      <th width="270" style="border: 1px solid #888; padding: 10px; text-align: center;">Informasi Kelompok</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" style="border: 1px solid #888; padding: 10px;">
+        <a href="img.png"><img src="img.png" alt="Tampilan awal aplikasi" height="520"></a>
+      </td>
+      <td align="center" valign="top" style="border: 1px solid #888; padding: 10px;">
+        <a href="img_1.png"><img src="img_1.png" alt="Platform dan daftar anggota kelompok" height="520"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-`Scaffold` menempatkan `FloatingActionButton` berikon tambah di kanan bawah.
-Ikon memiliki deskripsi aksesibilitas "Tambah pesanan". Tombol tetap terlihat
-saat daftar digulir, dan daftar memiliki ruang bawah agar kartu terakhir dapat
-digulir melewati tombol. Sesuai Modul 03, aksi tambah belum diimplementasikan;
-menekan FAB belum membuka formulir atau menambah data.
+## Modul 2 - Simulasi Status Pesanan
 
-### Pembagian Kerja Modul 03
+Program menggunakan `SumberPesananPalsu` untuk menghasilkan perubahan
+status melalui `Flow`. Setiap status diterima dengan `collect`, kemudian
+ditampilkan di konsol menggunakan fungsi `label()`.
 
-| Anggota | Kontribusi |
-| --- | --- |
-| Rifka | Komponen `KartuPesanan` menggunakan `Card`, `Row`, dan `Column`, serta `LabelStatus`. |
-| Daniel | 11 data dummy `Pesanan`, pengurutan `sortedByDescending`, dan penyaringan `filter`. |
-| Fadzilah | `LayarDaftarPesanan` menggunakan `LazyColumn` dan memanggil `KartuPesanan`. |
-| Marvin | Integrasi layar utama, FAB berikon tambah, screenshot aplikasi, dan dokumentasi. |
+### Hasil Pengujian
 
-### Menjalankan Tampilan Desktop dari PowerShell
+Status muncul berurutan sesuai jeda simulasi:
 
-Jalankan dari folder utama repository. Contoh ini memakai JDK bawaan Android
-Studio dan Android SDK pada lokasi instalasi standar Windows; sesuaikan jika
-lokasi instalasi berbeda. Android Studio dan emulator tidak perlu dibuka.
+```text
+Simulasi status pesanan #1
+Menunggu Konfirmasi
+Pesanan sedang diproses oleh koki Chef Juna
+Pesanan sedang diantar oleh driver Pak Budi
+Pesanan selesai
+Simulasi selesai.
+```
+
+Program selesai tanpa error dan Gradle menampilkan `BUILD SUCCESSFUL`.
+
+### Screenshot Hasil Konsol
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Hasil Simulasi Status Pesanan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/hasil-simulasi.png"><img src="docs/hasil-simulasi.png" alt="Hasil simulasi status pesanan di konsol" width="400"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Modul 3 - Daftar Pesanan dan Tombol Tambah
+
+Daftar menampilkan 11 pesanan dummy menggunakan `LazyColumn` dan
+`KartuPesanan`, diurutkan dari ID terbesar dengan `sortedByDescending`.
+Setiap kartu berisi nama pemesan, rincian pesanan, lokasi antar, catatan
+jika ada, dan status pesanan.
+
+Tombol tambah (FAB) berada di kanan bawah dan tetap terlihat saat daftar
+digulir. Tombol ini belum menambah data atau membuka formulir.
+
+### Tangkapan Layar Aplikasi
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Daftar Pesanan dan Tombol Tambah</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/daftar-pesanan-fab.png"><img src="docs/daftar-pesanan-fab.png" alt="Daftar pesanan kantin dengan FAB tambah di kanan bawah" width="800"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Panduan Menjalankan Project
+
+### Menjalankan Aplikasi di Android Studio
+
+1. Buka Android Studio, pilih **Open**, lalu pilih folder utama project.
+2. Tunggu proses Gradle Sync selesai.
+3. Pilih konfigurasi **androidApp**.
+4. Pilih emulator Android atau HP yang sudah terhubung dengan USB debugging aktif.
+5. Klik **Run** untuk membuka aplikasi.
+
+### Menjalankan Simulasi Status Pesanan
+
+Buka project di Android Studio, lalu buka tab **Terminal** dengan shell
+**PowerShell**. Jalankan perintah berikut dari folder utama project:
 
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
-.\gradlew.bat :desktopApp:run --console=plain
+.\gradlew.bat :desktopApp:runSimulasi --console=plain
 ```
 
-Perintah membuka jendela aplikasi Desktop. Screenshot di atas diambil dari
-jendela aplikasi, bukan terminal. Simulasi konsol dari Modul 02 masih dapat
-dijalankan dengan perintah pada bagian "Pengujian Simulasi Status Pesanan".
-
-### Verifikasi Modul 03
-
-- Build Desktop (`:desktopApp:classes`) dan dua tes JVM bawaan
-  (`:shared:jvmTest`) berhasil.
-- Tampilan Desktop diperiksa langsung: pesanan terbaru muncul di atas,
-  daftar dapat digulir hingga pesanan pertama, dan FAB tetap terlihat.
-- FAB dapat diklik tanpa error; aksi tambah masih berupa callback kosong
-  sesuai batas tugas Modul 03.
-
-### Tampilan Kelompok Sebelumnya
-
-![img.png](img.png)
-![img_1.png](img_1.png)
+### Struktur Project
 
 This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
 
@@ -102,38 +159,3 @@ Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
-
-## Pengujian Simulasi Status Pesanan
-
-Program menggunakan `SumberPesananPalsu` untuk menghasilkan perubahan
-status melalui `Flow`. Setiap status diterima dengan `collect`, kemudian
-ditampilkan di konsol menggunakan fungsi `label()`.
-
-### Cara Menjalankan
-
-Buka PowerShell di folder utama project, lalu jalankan:
-
-```powershell
-$env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
-$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
-.\gradlew.bat :desktopApp:runSimulasi --console=plain
-```
-
-### Hasil Pengujian
-
-Status muncul berurutan sesuai jeda simulasi:
-
-```text
-Simulasi status pesanan #1
-Menunggu Konfirmasi
-Pesanan sedang diproses oleh koki Chef Juna
-Pesanan sedang diantar oleh driver Pak Budi
-Pesanan selesai
-Simulasi selesai.
-```
-
-Program selesai tanpa error dan Gradle menampilkan `BUILD SUCCESSFUL`.
-
-### Screenshot Hasil Konsol
-
-![Hasil simulasi status pesanan](docs/hasil-simulasi.png)
