@@ -11,6 +11,59 @@ Repository ini berisi proyek aplikasi Kotlin Multiplatform (KMP) untuk mata kuli
   * Marvin Karyanda (123140185)
 
 ## Tangkapan Layar Aplikasi
+
+### Modul 03 - Daftar Pesanan dan Tombol Tambah
+
+![Daftar pesanan kantin dengan FAB tambah di kanan bawah](docs/daftar-pesanan-fab.jpg)
+
+Layar menampilkan 11 data contoh menggunakan `LazyColumn` dan `KartuPesanan`.
+Data diurutkan berdasarkan ID terbesar melalui `getPesananTerbaru()`
+(`sortedByDescending`), sehingga pesanan terbaru tampil di atas. Setiap kartu
+memuat nama pemesan, rincian pesanan, lokasi antar, catatan jika ada, dan label
+status dari `StatusPesanan`.
+
+`Scaffold` menempatkan `FloatingActionButton` berikon tambah di kanan bawah.
+Ikon memiliki deskripsi aksesibilitas "Tambah pesanan". Tombol tetap terlihat
+saat daftar digulir, dan daftar memiliki ruang bawah agar kartu terakhir dapat
+digulir melewati tombol. Sesuai Modul 03, aksi tambah belum diimplementasikan;
+menekan FAB belum membuka formulir atau menambah data.
+
+### Pembagian Kerja Modul 03
+
+| Anggota | Kontribusi |
+| --- | --- |
+| Rifka | Komponen `KartuPesanan` menggunakan `Card`, `Row`, dan `Column`, serta `LabelStatus`. |
+| Daniel | 11 data dummy `Pesanan`, pengurutan `sortedByDescending`, dan penyaringan `filter`. |
+| Fadzilah | `LayarDaftarPesanan` menggunakan `LazyColumn` dan memanggil `KartuPesanan`. |
+| Marvin | Integrasi layar utama, FAB berikon tambah, screenshot aplikasi, dan dokumentasi. |
+
+### Menjalankan Tampilan Desktop dari PowerShell
+
+Jalankan dari folder utama repository. Contoh ini memakai JDK bawaan Android
+Studio dan Android SDK pada lokasi instalasi standar Windows; sesuaikan jika
+lokasi instalasi berbeda. Android Studio dan emulator tidak perlu dibuka.
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+.\gradlew.bat :desktopApp:run --console=plain
+```
+
+Perintah membuka jendela aplikasi Desktop. Screenshot di atas diambil dari
+jendela aplikasi, bukan terminal. Simulasi konsol dari Modul 02 masih dapat
+dijalankan dengan perintah pada bagian "Pengujian Simulasi Status Pesanan".
+
+### Verifikasi Modul 03
+
+- Build Desktop (`:desktopApp:classes`) dan dua tes JVM bawaan
+  (`:shared:jvmTest`) berhasil.
+- Tampilan Desktop diperiksa langsung: pesanan terbaru muncul di atas,
+  daftar dapat digulir hingga pesanan pertama, dan FAB tetap terlihat.
+- FAB dapat diklik tanpa error; aksi tambah masih berupa callback kosong
+  sesuai batas tugas Modul 03.
+
+### Tampilan Kelompok Sebelumnya
+
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 
