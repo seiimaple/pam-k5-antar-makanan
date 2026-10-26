@@ -101,6 +101,43 @@ digulir. Tombol ini belum menambah data atau membuka formulir.
   </tbody>
 </table>
 
+## Modul 4 - Form Pesanan dan Daftar Reaktif
+
+Tombol tambah (FAB) sekarang membuka form pesanan. Nama pemesan, pesanan,
+dan lokasi antar wajib diisi, sedangkan catatan khusus boleh kosong.
+Tombol Simpan Pesanan aktif setelah semua kolom wajib terisi.
+
+Setelah disimpan, aplikasi kembali ke daftar dan pesanan baru langsung
+muncul di urutan teratas. Daftar mengikuti perubahan `StateFlow`, jadi
+tidak perlu membuka ulang aplikasi. Tombol Kembali bisa digunakan untuk
+kembali ke daftar tanpa menyimpan. Data masih disimpan di memori dan akan
+kembali ke data dummy saat proses aplikasi dimulai ulang.
+
+### Tangkapan Layar Aplikasi
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Form Kosong</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Form Terisi</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Pesanan Baru di Daftar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/form-pesanan-kosong.png"><img src="docs/form-pesanan-kosong.png" alt="Form kosong dengan tombol simpan belum aktif" height="480"></a>
+      </td>
+      <td align="center" valign="top" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/form-pesanan-terisi.png"><img src="docs/form-pesanan-terisi.png" alt="Form terisi dan tombol simpan aktif" height="480"></a>
+      </td>
+      <td align="center" valign="top" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/pesanan-baru.png"><img src="docs/pesanan-baru.png" alt="Pesanan baru langsung tampil di bagian atas daftar" height="480"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Panduan Menjalankan Project
 
 ### Menjalankan Aplikasi di Android Studio
