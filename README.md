@@ -138,6 +138,68 @@ kembali ke data dummy saat proses aplikasi dimulai ulang.
   </tbody>
 </table>
 
+## Modul 5 - Navigasi Antar Layar
+
+Menu bawah berisi tiga tab: Beranda, Asisten, dan Profil. Dari Beranda,
+klik kartu pesanan untuk membuka detail sesuai ID-nya, atau tekan tombol **+**
+untuk membuka form. Setelah pesanan disimpan, aplikasi kembali ke Beranda
+dan daftar langsung diperbarui. Asisten dan Profil masih memakai tampilan contoh.
+
+### Peta Navigasi
+
+<p align="center">
+  <a href="docs/modul-5/peta-navigasi.svg"><img src="docs/modul-5/peta-navigasi.svg" alt="Menu bawah membuka Beranda, Asisten, atau Profil. Dari Beranda, klik kartu untuk membuka detail atau tekan tombol tambah untuk membuka form." width="720"></a>
+</p>
+
+Dari Detail, pilih **Kembali** untuk kembali ke Beranda. Dari form, pilih
+**Kembali** atau simpan pesanan untuk kembali ke daftar.
+
+### Tangkapan Layar Aplikasi
+
+Screenshot diambil dari versi Desktop.
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Beranda</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Asisten</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Profil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-5/beranda.png"><img src="docs/modul-5/beranda.png" alt="Beranda" width="240"></a>
+      </td>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-5/asisten.png"><img src="docs/modul-5/asisten.png" alt="Asisten" width="240"></a>
+      </td>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-5/profil.png"><img src="docs/modul-5/profil.png" alt="Profil" width="240"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Detail Pesanan</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Form Pesanan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-5/detail.png"><img src="docs/modul-5/detail.png" alt="Detail Pesanan" width="360"></a>
+      </td>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-5/form.png"><img src="docs/modul-5/form.png" alt="Form Pesanan" width="360"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Panduan Menjalankan Project
 
 ### Menjalankan Aplikasi di Android Studio

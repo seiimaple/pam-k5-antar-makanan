@@ -15,7 +15,7 @@ kotlin = "2.4.20"
 kotlinx-coroutines = "1.11.0"
 material3 = "1.12.0-alpha03"
 # Tambahan versi untuk navigasi dan serialisasi
-navigation-compose = "2.8.0-alpha08"
+navigation-compose = "2.10.0"
 kotlinx-serialization = "1.7.1"
 
 [libraries]
