@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="365" viewBox="0 0 720 365" role="img" aria-labelledby="judul deskripsi">
+  <title id="judul">Peta navigasi aplikasi Pesanan Kantin</title>
+  <desc id="deskripsi">Menu bawah berisi tab Beranda, Asisten, dan Profil. Di Beranda, klik kartu untuk membuka detail pesanan, atau tekan tombol tambah untuk membuka form pesanan.</desc>
+
+  <defs>
+    <marker id="panah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 1 L7 4 L1 7" fill="none" stroke="#a1a1aa" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="365" rx="16" fill="#181818"/>
+
+  <g fill="none" stroke="#a1a1aa" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#panah)">
+    <path d="M307 80 V94 Q307 104 297 104 H140 Q130 104 130 114 V131"/>
+    <path d="M360 80 V131"/>
+    <path d="M413 80 V94 Q413 104 423 104 H580 Q590 104 590 114 V131"/>
+    <path d="M130 196 V278"/>
+    <path d="M170 196 V207 Q170 217 180 217 H350 Q360 217 360 227 V278"/>
+  </g>
+
+  <g fill="#132747" stroke="#2c4265">
+    <rect x="280" y="20" width="160" height="60" rx="16"/>
+    <rect x="66" y="138" width="128" height="58" rx="16"/>
+    <rect x="296" y="138" width="128" height="58" rx="16"/>
+    <rect x="526" y="138" width="128" height="58" rx="16"/>
+    <rect x="43" y="286" width="174" height="58" rx="16"/>
+    <rect x="270" y="286" width="180" height="58" rx="16"/>
+  </g>
+
+  <g fill="#0c1829" stroke="#2c4265">
+    <rect x="83" y="232" width="94" height="27" rx="13.5"/>
+    <rect x="296" y="232" width="128" height="27" rx="13.5"/>
+  </g>
+
+  <g fill="#bdd6f9" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600" text-anchor="middle">
+    <text x="360" y="55">Menu bawah</text>
+    <text x="130" y="172">Beranda</text>
+    <text x="360" y="172">Asisten</text>
+    <text x="590" y="172">Profil</text>
+    <text x="130" y="320">Detail pesanan</text>
+    <text x="360" y="320">Tambah pesanan</text>
+    <text x="130" y="250" font-size="13">Klik kartu</text>
+    <text x="360" y="250" font-size="13">Tombol tambah</text>
+  </g>
+</svg>
