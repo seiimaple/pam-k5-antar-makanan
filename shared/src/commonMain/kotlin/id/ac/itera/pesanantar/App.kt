@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import id.ac.itera.pesanantar.nav.*
 import id.ac.itera.pesanantar.data.DaftarPesananDummy
+import id.ac.itera.pesanantar.ui.LayarDetailPesanan
 import id.ac.itera.pesanantar.ui.LayarUtama
 
 @Composable
@@ -49,7 +50,10 @@ fun App() {
                 val rute = entry.toRoute<RuteDetail>()
                 val idPesanan = rute.id
 
-                // TODO (Daniel): Masukkan LayarDetailPesanan(id = idPesanan) di sini
+                LayarDetailPesanan(
+                    idPesanan = idPesanan,
+                    onKembali = { nav.popBackStack() }
+                )
             }
         }
     }
