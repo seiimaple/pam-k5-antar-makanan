@@ -2,20 +2,19 @@ package id.ac.itera.pesanantar.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.ac.itera.pesanantar.data.DaftarPesananDummy
-import kotlinx.coroutines.delay
+import id.ac.itera.pesanantar.data.SumberPesananJaringan
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 
 class FormPesananViewModel : ViewModel() {
 
-    // Private MutableStateFlow: hanya ViewModel yang boleh mengubah state
-    private val _uiState = MutableStateFlow(FormPesananUiState())
+    private val sumber = SumberPesananJaringan()
 
-    // Public StateFlow: layar (View) hanya bisa membaca state ini
+    private val _uiState = MutableStateFlow(FormPesananUiState())
     val uiState: StateFlow<FormPesananUiState> = _uiState.asStateFlow()
 
     fun ubahNamaPemesan(teks: String) =
@@ -36,19 +35,28 @@ class FormPesananViewModel : ViewModel() {
 
         viewModelScope.launch {
             _uiState.update { it.copy(sedangMenyimpan = true) }
-            delay(800) // Simulasi proses menyimpan data
 
-            // Memanggil fungsi tambahPesanan di DaftarPesananDummy
-            DaftarPesananDummy.tambahPesanan(
-                namaPemesan = stateSaatIni.namaPemesan.trim(),
-                pesanan = stateSaatIni.pesanan.trim(),
-                lokasiAntar = stateSaatIni.lokasiAntar.trim(),
-                catatanKhusus = stateSaatIni.catatanKhusus.trim().ifBlank { null }
-            )
+            try {
+                sumber.kirimPesananBaru(
+                    namaPemesan = stateSaatIni.namaPemesan.trim(),
+                    pesanan = stateSaatIni.pesanan.trim(),
+                    lokasiAntar = stateSaatIni.lokasiAntar.trim(),
+                    catatanKhusus = stateSaatIni.catatanKhusus.trim().ifBlank { null }
+                )
 
-            // Reset isi form ke kosong dan tampilkan pesan konfirmasi
-            _uiState.value = FormPesananUiState(pesan = "Pesanan baru berhasil ditambahkan")
-            onBerhasilSimpan()
+                _uiState.value = FormPesananUiState(pesan = "Pesanan baru berhasil ditambahkan")
+                onBerhasilSimpan()
+
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        sedangMenyimpan = false,
+                        pesan = "Gagal mengirim: ${e.message}"
+                    )
+                }
+            }
         }
     }
 }
