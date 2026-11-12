@@ -50,12 +50,8 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
-        // Tambahan Engine Ktor untuk iOS
-        val iosMain by creating {
-            dependsOn(commonMain.get())
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
 
         commonMain.dependencies {
