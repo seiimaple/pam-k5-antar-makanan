@@ -8,7 +8,9 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -17,8 +19,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import id.ac.itera.pesanantar.data.DaftarPesananDummy
+import androidx.lifecycle.viewmodel.compose.viewModel
+import id.ac.itera.pesanantar.data.PesananApi
+import id.ac.itera.pesanantar.data.SumberPesananJaringan
 import id.ac.itera.pesanantar.nav.*
+import id.ac.itera.pesanantar.ui.DaftarViewModel
+import id.ac.itera.pesanantar.ui.DetailPesananViewModel
+import id.ac.itera.pesanantar.ui.FormPesananViewModel
 import id.ac.itera.pesanantar.ui.LayarAsisten
 import id.ac.itera.pesanantar.ui.LayarDetailPesanan
 import id.ac.itera.pesanantar.ui.LayarProfil
@@ -33,7 +40,15 @@ data class TabItem(
 
 @Composable
 @Preview
-fun App() {
+fun App() = App(apiBaseUrl = null)
+
+@Composable
+fun App(apiBaseUrl: String?) {
+    val sumber = remember(apiBaseUrl) {
+        if (apiBaseUrl.isNullOrBlank()) SumberPesananJaringan()
+        else SumberPesananJaringan(PesananApi(baseUrl = apiBaseUrl.trimEnd('/')))
+    }
+
     MaterialTheme {
         val nav = rememberNavController()
 
@@ -70,8 +85,11 @@ fun App() {
             ) {
 
                 composable<RuteBeranda> {
+                    val daftarViewModel = viewModel { DaftarViewModel(sumber) }
+                    val daftar by daftarViewModel.uiState.collectAsState()
                     LayarUtama(
-                        daftarPesanan = DaftarPesananDummy.listOfPesanan,
+                        state = daftar,
+                        onCobaLagi = daftarViewModel::muat,
                         onPesananKlik = { nav.navigate(RuteDetail(it.id)) },
                         onTambahPesanan = { nav.navigate(RuteForm) }
                     )
@@ -85,17 +103,29 @@ fun App() {
                     LayarProfil()
                 }
 
-                composable<RuteForm> {
-                    LayarTambahPesanan(onKembali = { nav.popBackStack() })
+                composable<RuteForm> { formEntry ->
+                    val beranda = remember(formEntry) { nav.getBackStackEntry<RuteBeranda>() }
+                    val daftarViewModel = viewModel(viewModelStoreOwner = beranda) { DaftarViewModel(sumber) }
+                    val formViewModel = viewModel { FormPesananViewModel(sumber) }
+                    LayarTambahPesanan(
+                        formViewModel = formViewModel,
+                        onKembali = { nav.popBackStack() },
+                        onBerhasilSimpan = {
+                            daftarViewModel.muat()
+                            nav.popBackStack()
+                        }
+                    )
                 }
 
                 composable<RuteDetail> { entry ->
-                    val rute = entry.toRoute<RuteDetail>()
-                    val idPesanan = rute.id
-
+                    val idPesanan = entry.toRoute<RuteDetail>().id
+                    val beranda = remember(entry) { nav.getBackStackEntry<RuteBeranda>() }
+                    val daftarViewModel = viewModel(viewModelStoreOwner = beranda) { DaftarViewModel(sumber) }
+                    val detailViewModel = viewModel { DetailPesananViewModel(idPesanan, daftarViewModel.uiState) }
                     LayarDetailPesanan(
                         idPesanan = idPesanan,
-                        onKembali = { nav.popBackStack() }
+                        onKembali = { nav.popBackStack() },
+                        vm = detailViewModel
                     )
                 }
             }

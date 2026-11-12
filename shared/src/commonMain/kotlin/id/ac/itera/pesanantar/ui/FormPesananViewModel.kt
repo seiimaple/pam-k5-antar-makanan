@@ -10,10 +10,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
 
-class FormPesananViewModel : ViewModel() {
-
-    private val sumber = SumberPesananJaringan()
-
+class FormPesananViewModel(
+    private val sumber: SumberPesananJaringan = SumberPesananJaringan()
+) : ViewModel() {
     private val _uiState = MutableStateFlow(FormPesananUiState())
     val uiState: StateFlow<FormPesananUiState> = _uiState.asStateFlow()
 
