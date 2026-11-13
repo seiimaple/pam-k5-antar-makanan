@@ -200,6 +200,37 @@ Screenshot diambil dari versi Desktop.
   </tbody>
 </table>
 
+## Modul 6 - Networking REST API dengan Ktor
+
+Beranda menampilkan **Memuat pesanan…** saat mengambil daftar dari API.
+Kalau gagal, tekan **Coba Lagi**. Setelah pesanan baru berhasil disimpan,
+daftar di Beranda otomatis dimuat ulang.
+
+- Alamat bawaan: `https://pesanantar.itera.ac.id/api`
+- Mock API untuk uji lokal di Desktop: `http://127.0.0.1:8080/api`
+- Endpoint: `GET /pesanan`, `GET /pesanan/{id}`, dan `POST /pesanan`
+
+### Tangkapan Layar Aplikasi
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Memuat Pesanan</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Gagal Memuat Pesanan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-6/memuat.png"><img src="docs/modul-6/memuat.png" alt="Indikator saat pesanan dimuat" width="360"></a>
+      </td>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-6/gagal.png"><img src="docs/modul-6/gagal.png" alt="Pesan gagal dan tombol Coba Lagi" width="360"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Panduan Menjalankan Project
 
 ### Menjalankan Aplikasi di Android Studio
@@ -220,6 +251,35 @@ $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :desktopApp:runSimulasi --console=plain
 ```
+
+### Menjalankan Mock API untuk Modul 6
+
+Mock API hanya dipakai untuk mencoba loading, gagal, dan retry di Desktop
+tanpa bergantung pada server tim.
+
+1. Buka terminal PowerShell di folder project. Saat mock API belum berjalan,
+   jalankan Desktop dengan alamat lokal berikut:
+
+   ```powershell
+   $env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
+   $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+   $env:PESANAN_API_URL = "http://127.0.0.1:8080/api"
+   .\gradlew.bat :desktopApp:run --no-configuration-cache --console=plain
+   ```
+
+2. Setelah pesan gagal muncul, ambil screenshot `gagal.png`.
+3. Di terminal kedua, nyalakan mock API dengan jeda 7 detik:
+
+   ```powershell
+   py -3 tools/mock_pesanan.py --delay 7
+   ```
+
+4. Kembali ke aplikasi dan klik **Coba Lagi**. Ambil screenshot `memuat.png`
+   sebelum daftar tampil. Setelah itu, periksa apakah daftar berhasil dimuat.
+   Kalau kelewat, jalankan ulang aplikasi dengan mock API tetap menyala.
+
+Data mock hanya disimpan selama server lokal berjalan. Untuk kembali ke
+alamat API bawaan, hapus variabel `PESANAN_API_URL` dari terminal Desktop.
 
 ### Struktur Project
 

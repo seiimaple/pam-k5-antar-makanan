@@ -24,21 +24,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import id.ac.itera.pesanantar.model.Pesanan
-import kotlinx.coroutines.flow.StateFlow
 import org.jetbrains.compose.resources.painterResource
 import pesanantarmakanan.shared.generated.resources.Res
 import pesanantarmakanan.shared.generated.resources.ic_add
 
 @Composable
 fun LayarUtama(
-    daftarPesanan: StateFlow<List<Pesanan>>,
+    state: DaftarUiState,
+    onCobaLagi: () -> Unit,
     onPesananKlik: (Pesanan) -> Unit,
     onTambahPesanan: () -> Unit
 ) {
-    val pesanan by daftarPesanan.collectAsState()
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButton = {
@@ -55,17 +52,20 @@ fun LayarUtama(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 20.dp)
             ) {
                 Text("Pesanan Kantin", style = MaterialTheme.typography.headlineMedium)
-                Text(
-                    text = "${pesanan.size} pesanan · Terbaru di atas",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                if (state is DaftarUiState.Berhasil) {
+                    Text(
+                        text = "${state.pesanan.size} pesanan · Terbaru di atas",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             }
 
             HorizontalDivider()
 
             LayarDaftarPesanan(
-                daftarPesanan = pesanan,
+                state = state,
+                onCobaLagi = onCobaLagi,
                 onPesananKlik = onPesananKlik,
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 contentPadding = PaddingValues(
@@ -80,8 +80,11 @@ fun LayarUtama(
 }
 
 @Composable
-internal fun LayarTambahPesanan(onKembali: () -> Unit) {
-    val formViewModel = viewModel { FormPesananViewModel() }
+internal fun LayarTambahPesanan(
+    formViewModel: FormPesananViewModel,
+    onKembali: () -> Unit,
+    onBerhasilSimpan: () -> Unit
+) {
     val formState by formViewModel.uiState.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -102,7 +105,7 @@ internal fun LayarTambahPesanan(onKembali: () -> Unit) {
             modifier = Modifier.weight(1f).fillMaxWidth()
                 .imePadding().verticalScroll(rememberScrollState())
         ) {
-            FormPesananScreen(vm = formViewModel, onKembali = onKembali)
+            FormPesananScreen(vm = formViewModel, onKembali = onBerhasilSimpan)
         }
     }
 }

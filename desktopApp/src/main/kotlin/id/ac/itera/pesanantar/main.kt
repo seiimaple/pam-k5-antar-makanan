@@ -8,6 +8,6 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "PesanAntarMakanan",
     ) {
-        App()
+        App(apiBaseUrl = System.getenv("PESANAN_API_URL"))
     }
 }
