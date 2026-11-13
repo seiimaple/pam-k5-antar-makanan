@@ -1,0 +1,19 @@
+-- Membuat tabel khusus Draf
+CREATE TABLE Draf (
+    id INTEGER NOT NULL PRIMARY KEY,
+    nama TEXT NOT NULL,
+    pesanan TEXT NOT NULL,
+    lokasi TEXT NOT NULL,
+    catatan TEXT
+);
+
+-- Kita hanya butuh satu baris draf, makanya selalu menggunakan id = 1
+ambilDraf:
+SELECT * FROM Draf WHERE id = 1;
+
+simpanDraf:
+INSERT OR REPLACE INTO Draf
+VALUES (1, ?, ?, ?, ?);
+
+hapusDraf:
+DELETE FROM Draf;

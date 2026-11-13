@@ -1,0 +1,24 @@
+-- Membuat tabel utama untuk daftar pesanan
+CREATE TABLE PesananEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    nama TEXT NOT NULL,
+    pesanan TEXT NOT NULL,
+    lokasi TEXT NOT NULL,
+    status TEXT NOT NULL,
+    catatan TEXT
+);
+
+-- Nama berakhiran titik dua (semua:) akan diubah menjadi nama fungsi di Kotlin
+semua:
+SELECT * FROM PesananEntity ORDER BY id DESC;
+
+byId:
+SELECT * FROM PesananEntity WHERE id = ?;
+
+-- INSERT OR REPLACE: Tambahkan data baru, atau timpa jika ID tersebut sudah ada
+simpan:
+INSERT OR REPLACE INTO PesananEntity
+VALUES (?, ?, ?, ?, ?, ?);
+
+hapusSemua:
+DELETE FROM PesananEntity;

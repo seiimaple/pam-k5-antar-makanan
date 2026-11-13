@@ -1,14 +1,25 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
+    // Tambahan Plugin SQLDelight
+    alias(libs.plugins.sqlDelight)
+}
+
+// Konfigurasi Database SQLDelight
+sqldelight {
+    databases {
+        create("PesanAntarDb") {
+            packageName.set("id.ac.itera.pesanantar.db")
+        }
+    }
 }
 
 kotlin {
+    jvmToolchain(11)
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -21,14 +32,11 @@ kotlin {
 
     jvm()
 
-    android {
+    androidLibrary {
         namespace = "id.ac.itera.pesanantar.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
-        compilerOptions {
-            jvmTarget = JvmTarget.JVM_11
-        }
         androidResources {
             enable = true
         }
@@ -48,6 +56,9 @@ kotlin {
             implementation(libs.compose.uiTooling)
             // Tambahan Engine Ktor untuk Android
             implementation(libs.ktor.client.okhttp)
+
+            // Tambahan Driver SQLDelight untuk Android
+            implementation(libs.sqldelight.android.driver)
         }
 
         jvmMain.dependencies {
@@ -56,6 +67,9 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
+            // Tambahan Driver SQLDelight untuk iOS
+            implementation(libs.sqldelight.native.driver)
         }
 
         commonMain.dependencies {
@@ -75,6 +89,9 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+
+            // Tambahan Coroutines Extensions SQLDelight
+            implementation(libs.sqldelight.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
