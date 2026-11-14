@@ -32,6 +32,7 @@ import pesanantarmakanan.shared.generated.resources.ic_add
 @Composable
 fun LayarUtama(
     state: DaftarUiState,
+    pesanOffline: String?,
     onCobaLagi: () -> Unit,
     onPesananKlik: (Pesanan) -> Unit,
     onTambahPesanan: () -> Unit
@@ -65,6 +66,7 @@ fun LayarUtama(
 
             LayarDaftarPesanan(
                 state = state,
+                pesanOffline = pesanOffline,
                 onCobaLagi = onCobaLagi,
                 onPesananKlik = onPesananKlik,
                 modifier = Modifier.weight(1f).fillMaxWidth(),

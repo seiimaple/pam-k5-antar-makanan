@@ -51,6 +51,9 @@ class DaftarViewModel(
             }
             _pesan.value = try {
                 sumber.segarkan()
+                if (_uiState.value !is DaftarUiState.Berhasil) {
+                    _uiState.value = DaftarUiState.Berhasil(emptyList())
+                }
                 null
             } catch (e: CancellationException) {
                 throw e

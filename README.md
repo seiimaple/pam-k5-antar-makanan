@@ -231,6 +231,40 @@ daftar di Beranda otomatis dimuat ulang.
   </tbody>
 </table>
 
+## Modul 7 - Penyimpanan Lokal dan Offline-first
+
+Beranda membaca daftar dari database lokal SQLDelight. Saat API bisa
+dijangkau, data terbaru dari server menggantikan data yang tersimpan.
+Kalau penyegaran gagal, daftar terakhir tetap bisa dibuka dan muncul
+pesan **Offline. Menampilkan data terakhir.** Tekan **Coba Lagi** setelah
+koneksi kembali. Kalau aplikasi belum pernah menyimpan daftar, layar
+menampilkan pesan gagal.
+
+Isian form tersimpan sebagai draf setelah berhenti mengetik sekitar 500 ms.
+Saat form dibuka lagi, isian terakhir muncul kembali. Mengirim pesanan tetap
+butuh koneksi ke API; draf dihapus setelah pesanan berhasil dikirim.
+
+### Tangkapan Layar Aplikasi
+
+<table align="center" border="1" rules="all" cellspacing="0" cellpadding="10" style="display: table; margin-left: auto; margin-right: auto; border-collapse: collapse; border: 1px solid #888;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Daftar Pesanan saat Offline</th>
+      <th style="border: 1px solid #888; padding: 10px; text-align: center;">Draf yang Dibuka Kembali</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-7/offline.png"><img src="docs/modul-7/offline.png" alt="Peringatan offline dan daftar pesanan terakhir" width="360"></a>
+      </td>
+      <td align="center" style="border: 1px solid #888; padding: 10px;">
+        <a href="docs/modul-7/draf.png"><img src="docs/modul-7/draf.png" alt="Isian draf yang muncul kembali saat form dibuka" width="360"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Panduan Menjalankan Project
 
 ### Menjalankan Aplikasi di Android Studio
@@ -280,6 +314,22 @@ tanpa bergantung pada server tim.
 
 Data mock hanya disimpan selama server lokal berjalan. Untuk kembali ke
 alamat API bawaan, hapus variabel `PESANAN_API_URL` dari terminal Desktop.
+
+### Mencoba Mode Offline dan Draf
+
+1. Buka aplikasi saat API berjalan dan tunggu sampai daftar pesanan tampil.
+   Di Desktop, mock dari panduan di atas bisa dijalankan dengan
+   `py -3 tools/mock_pesanan.py` tanpa jeda.
+2. Aktifkan mode pesawat dan pastikan Wi-Fi mati saat memakai Android dengan
+   API yang dapat dijangkau. Untuk uji Desktop dengan mock, hentikan mock
+   memakai **Ctrl+C** di terminal server. Tutup dan buka lagi aplikasi dengan
+   alamat API yang sama, lalu tunggu peringatan offline muncul bersama daftar.
+   Simpan gambar sebagai `docs/modul-7/offline.png`.
+3. Tekan **+**, isi beberapa kolom, lalu tunggu sekitar satu detik. Tutup
+   aplikasi tanpa menekan **Simpan Pesanan**, buka kembali, dan tekan **+**.
+   Ambil screenshot isian yang muncul lagi sebagai `docs/modul-7/draf.png`.
+4. Setelah API bisa dijangkau lagi, tekan **Coba Lagi** di Beranda. Peringatan
+   hilang setelah daftar berhasil disegarkan.
 
 ### Struktur Project
 

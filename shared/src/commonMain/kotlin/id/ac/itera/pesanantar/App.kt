@@ -92,8 +92,10 @@ fun App(driverFactory: DriverFactory?, apiBaseUrl: String? = null) {
                 composable<RuteBeranda> {
                     val daftarViewModel = viewModel { DaftarViewModel(sumber) }
                     val daftar by daftarViewModel.uiState.collectAsState()
+                    val pesanOffline by daftarViewModel.pesan.collectAsState()
                     LayarUtama(
                         state = daftar,
+                        pesanOffline = pesanOffline,
                         onCobaLagi = daftarViewModel::muat,
                         onPesananKlik = { nav.navigate(RuteDetail(it.id)) },
                         onTambahPesanan = { nav.navigate(RuteForm) }

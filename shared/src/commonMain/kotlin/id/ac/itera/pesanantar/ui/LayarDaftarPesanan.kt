@@ -5,25 +5,72 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import id.ac.itera.pesanantar.model.Pesanan
 
 @Composable
 fun LayarDaftarPesanan(
     state: DaftarUiState,
+    pesanOffline: String?,
     onCobaLagi: () -> Unit,
     onPesananKlik: (Pesanan) -> Unit = {},
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(16.dp)
+) {
+    Column(modifier = modifier) {
+        if (state is DaftarUiState.Berhasil && pesanOffline != null) {
+            Surface(
+                modifier = Modifier.fillMaxWidth().padding(16.dp, 12.dp),
+                shape = MaterialTheme.shapes.medium,
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            ) {
+                Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                    Text(
+                        text = pesanOffline,
+                        modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    TextButton(onClick = onCobaLagi, modifier = Modifier.align(Alignment.End)) {
+                        Text("Coba Lagi")
+                    }
+                }
+            }
+        }
+
+        IsiDaftarPesanan(
+            state = state,
+            onCobaLagi = onCobaLagi,
+            onPesananKlik = onPesananKlik,
+            contentPadding = contentPadding,
+            modifier = Modifier.weight(1f).fillMaxWidth()
+        )
+    }
+}
+
+@Composable
+private fun IsiDaftarPesanan(
+    state: DaftarUiState,
+    onCobaLagi: () -> Unit,
+    onPesananKlik: (Pesanan) -> Unit,
+    contentPadding: PaddingValues,
+    modifier: Modifier
 ) {
     Box(modifier = modifier) {
         when (state) {
