@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class SumberPesananOffline(
-    private val db: PesanAntarDb,
+    val db: PesanAntarDb,
     private val api: PesananApi = PesananApi()
 ) : Sumber<StatusPesanan> {
 
