@@ -2,7 +2,7 @@ package id.ac.itera.pesanantar.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.ac.itera.pesanantar.data.SumberPesananJaringan
+import id.ac.itera.pesanantar.data.SumberPesananOffline
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
 
 class FormPesananViewModel(
-    private val sumber: SumberPesananJaringan = SumberPesananJaringan()
+    private val sumber: SumberPesananOffline
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(FormPesananUiState())
     val uiState: StateFlow<FormPesananUiState> = _uiState.asStateFlow()
