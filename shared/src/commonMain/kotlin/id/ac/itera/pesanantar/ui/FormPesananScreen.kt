@@ -17,7 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun FormPesananScreen(
-    vm: FormPesananViewModel = viewModel { FormPesananViewModel() },
+    vm: FormPesananViewModel,
     onKembali: () -> Unit = {}
 ) {
     val state by vm.uiState.collectAsState()

@@ -21,7 +21,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import androidx.lifecycle.viewmodel.compose.viewModel
 import id.ac.itera.pesanantar.data.PesananApi
-import id.ac.itera.pesanantar.data.SumberPesananJaringan
+import id.ac.itera.pesanantar.data.SumberPesananOffline
+import id.ac.itera.pesanantar.db.DriverFactory
+import id.ac.itera.pesanantar.db.PesanAntarDb
 import id.ac.itera.pesanantar.nav.*
 import id.ac.itera.pesanantar.ui.DaftarViewModel
 import id.ac.itera.pesanantar.ui.DetailPesananViewModel
@@ -40,13 +42,16 @@ data class TabItem(
 
 @Composable
 @Preview
-fun App() = App(apiBaseUrl = null)
+fun App() = App(driverFactory = null, apiBaseUrl = null)
 
 @Composable
-fun App(apiBaseUrl: String?) {
-    val sumber = remember(apiBaseUrl) {
-        if (apiBaseUrl.isNullOrBlank()) SumberPesananJaringan()
-        else SumberPesananJaringan(PesananApi(baseUrl = apiBaseUrl.trimEnd('/')))
+fun App(driverFactory: DriverFactory?, apiBaseUrl: String? = null) {
+    if (driverFactory == null) return
+
+    val sumber = remember(driverFactory, apiBaseUrl) {
+        val db = PesanAntarDb(driverFactory.createDriver())
+        val api = if (apiBaseUrl.isNullOrBlank()) PesananApi() else PesananApi(baseUrl = apiBaseUrl.trimEnd('/'))
+        SumberPesananOffline(db = db, api = api)
     }
 
     MaterialTheme {
@@ -87,8 +92,10 @@ fun App(apiBaseUrl: String?) {
                 composable<RuteBeranda> {
                     val daftarViewModel = viewModel { DaftarViewModel(sumber) }
                     val daftar by daftarViewModel.uiState.collectAsState()
+                    val pesanOffline by daftarViewModel.pesan.collectAsState()
                     LayarUtama(
                         state = daftar,
+                        pesanOffline = pesanOffline,
                         onCobaLagi = daftarViewModel::muat,
                         onPesananKlik = { nav.navigate(RuteDetail(it.id)) },
                         onTambahPesanan = { nav.navigate(RuteForm) }
