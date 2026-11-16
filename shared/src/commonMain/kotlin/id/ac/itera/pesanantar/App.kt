@@ -140,9 +140,7 @@ fun App(
                     val idPesanan = entry.toRoute<RuteDetail>().id
                     val beranda = remember(entry) { nav.getBackStackEntry<RuteBeranda>() }
                     val daftarViewModel = viewModel(viewModelStoreOwner = beranda) { DaftarViewModel(sumber) }
-
-                    // Nantinya, Fadzilah akan mengubah baris ini untuk menyuntikkan 'pemberitahu' ke dalam DetailPesananViewModel
-                    val detailViewModel = viewModel { DetailPesananViewModel(idPesanan, daftarViewModel.uiState) }
+                    val detailViewModel = viewModel { DetailPesananViewModel(idPesanan, daftarViewModel.uiState, pemberitahu) }
 
                     LayarDetailPesanan(
                         idPesanan = idPesanan,

@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import id.ac.itera.pesanantar.platform.MintaIzinNotifikasi // Import fungsi jembatan kita
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,6 +36,8 @@ fun LayarDetailPesanan(
     vm: DetailPesananViewModel
 ) {
     val pesanan by vm.pesanan.collectAsState()
+
+    MintaIzinNotifikasi()
 
     Scaffold(
         topBar = {
@@ -71,7 +74,6 @@ fun LayarDetailPesanan(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Status Card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -101,7 +103,6 @@ fun LayarDetailPesanan(
                     }
                 }
 
-                // Detail Pesanan Card
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
