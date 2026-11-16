@@ -25,6 +25,7 @@ import id.ac.itera.pesanantar.data.SumberPesananOffline
 import id.ac.itera.pesanantar.db.DriverFactory
 import id.ac.itera.pesanantar.db.PesanAntarDb
 import id.ac.itera.pesanantar.nav.*
+import id.ac.itera.pesanantar.platform.Pemberitahu // Tambahan import untuk P8
 import id.ac.itera.pesanantar.ui.DaftarViewModel
 import id.ac.itera.pesanantar.ui.DetailPesananViewModel
 import id.ac.itera.pesanantar.ui.FormPesananViewModel
@@ -42,10 +43,21 @@ data class TabItem(
 
 @Composable
 @Preview
-fun App() = App(driverFactory = null, apiBaseUrl = null)
+fun AppPreview() = App(
+    driverFactory = null,
+    apiBaseUrl = null,
+    // Tambahan dummy Pemberitahu khusus untuk Preview agar tidak error
+    pemberitahu = object : Pemberitahu {
+        override fun tampilkan(judul: String, isi: String) {}
+    }
+)
 
 @Composable
-fun App(driverFactory: DriverFactory?, apiBaseUrl: String? = null) {
+fun App(
+    driverFactory: DriverFactory?,
+    apiBaseUrl: String? = null,
+    pemberitahu: Pemberitahu // Parameter baru dari P8
+) {
     if (driverFactory == null) return
 
     val sumber = remember(driverFactory, apiBaseUrl) {
@@ -128,7 +140,10 @@ fun App(driverFactory: DriverFactory?, apiBaseUrl: String? = null) {
                     val idPesanan = entry.toRoute<RuteDetail>().id
                     val beranda = remember(entry) { nav.getBackStackEntry<RuteBeranda>() }
                     val daftarViewModel = viewModel(viewModelStoreOwner = beranda) { DaftarViewModel(sumber) }
+
+                    // Nantinya, Fadzilah akan mengubah baris ini untuk menyuntikkan 'pemberitahu' ke dalam DetailPesananViewModel
                     val detailViewModel = viewModel { DetailPesananViewModel(idPesanan, daftarViewModel.uiState) }
+
                     LayarDetailPesanan(
                         idPesanan = idPesanan,
                         onKembali = { nav.popBackStack() },
