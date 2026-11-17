@@ -265,6 +265,24 @@ butuh koneksi ke API; draf dihapus setelah pesanan berhasil dikirim.
   </tbody>
 </table>
 
+## Modul 8 - Notifikasi Status Pesanan
+
+Notifikasi ini dipakai untuk memberi kabar ketika status pesanan berubah.
+Di Android 13 ke atas, aplikasi meminta izin saat membuka detail pesanan.
+
+### Rekaman Pengujian
+
+Di Pixel 6, detail pesanan tetap terbuka setelah memilih **Allow** atau
+**Don't allow**.
+
+Mulai tiap skenario saat izin belum dipilih. Rekam dialog izin dan tindakan
+setelahnya. Untuk skenario **Izinkan**, cek notifikasi saat status pesanan
+berubah. Untuk **Jangan izinkan**, cek bahwa detail pesanan tetap bisa dibuka.
+
+| Platform | Izin diberikan | Izin ditolak |
+| --- | --- | --- |
+| Android | [Tonton](docs/modul-8/android-izin-diberikan.webm) | [Tonton](docs/modul-8/android-izin-ditolak.webm) |
+
 ## Panduan Menjalankan Project
 
 ### Menjalankan Aplikasi di Android Studio
